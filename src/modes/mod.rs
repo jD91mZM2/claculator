@@ -6,10 +6,12 @@ crate mod prelude {
 
 crate mod binary;
 crate mod number;
-crate mod text;
+crate mod utf8;
+crate mod utf32;
 crate use self::binary::{Binary, Octal, Hex};
 crate use self::number::Number;
-crate use self::text::Text;
+crate use self::utf8::Utf8;
+crate use self::utf32::Utf32;
 
 use self::prelude::*;
 
@@ -27,7 +29,8 @@ crate enum DynMode {
     Binary,
     Octal,
     Hex,
-    Text
+    Utf8,
+    Utf32
 }
 
 impl Mode for DynMode {
@@ -44,7 +47,8 @@ impl Mode for DynMode {
             DynMode::Binary => Binary.add(cur, c),
             DynMode::Octal => Octal.add(cur, c),
             DynMode::Hex => Hex.add(cur, c),
-            DynMode::Text => Text.add(cur, c)
+            DynMode::Utf8 => Utf8.add(cur, c),
+            DynMode::Utf32 => Utf32.add(cur, c),
         }
     }
 
@@ -54,7 +58,8 @@ impl Mode for DynMode {
             DynMode::Binary => Binary.pop(cur),
             DynMode::Octal => Octal.pop(cur),
             DynMode::Hex => Hex.pop(cur),
-            DynMode::Text => Text.pop(cur)
+            DynMode::Utf8 => Utf8.pop(cur),
+            DynMode::Utf32 => Utf32.pop(cur)
         }
     }
 }

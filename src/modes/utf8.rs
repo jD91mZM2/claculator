@@ -3,7 +3,7 @@ use std::ptr;
 use termion::color;
 
 #[derive(Clone, Copy)]
-crate struct Text;
+crate struct Utf8;
 
 fn to_string(cur: &Cursor) -> Option<String> {
     let mut bytes = Vec::with_capacity(cur.buf.len());
@@ -19,7 +19,7 @@ fn to_string(cur: &Cursor) -> Option<String> {
     String::from_utf8(bytes).ok()
 }
 
-impl Mode for Text {
+impl Mode for Utf8 {
     fn fmt<W: Write>(self, w: &mut W, cur: &Cursor, selected: bool) -> io::Result<()> {
         let string = match to_string(cur) {
             Some(string) => string,

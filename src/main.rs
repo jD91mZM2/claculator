@@ -75,7 +75,8 @@ fn main() -> Result<(), Error> {
         entry!(Binary, "Binary");
         entry!(Octal, "Octal");
         entry!(Hex, "Hex");
-        entry!(Text, "Text");
+        entry!(Utf8, "UTF-8");
+        entry!(Utf32, "UTF-32");
 
         match keys.next() {
             None => break,
@@ -89,15 +90,17 @@ fn main() -> Result<(), Error> {
                     DynMode::Number => DynMode::Binary,
                     DynMode::Binary => DynMode::Octal,
                     DynMode::Octal => DynMode::Hex,
-                    DynMode::Hex => DynMode::Text,
-                    DynMode::Text => DynMode::Number
+                    DynMode::Hex => DynMode::Utf8,
+                    DynMode::Utf8 => DynMode::Utf32,
+                    DynMode::Utf32 => DynMode::Number
                 },
                 Key::Up => mode = match mode {
-                    DynMode::Number => DynMode::Text,
+                    DynMode::Number => DynMode::Utf8,
                     DynMode::Binary => DynMode::Number,
                     DynMode::Octal => DynMode::Binary,
                     DynMode::Hex => DynMode::Octal,
-                    DynMode::Text => DynMode::Hex
+                    DynMode::Utf8 => DynMode::Hex,
+                    DynMode::Utf32 => DynMode::Utf8
                 },
                 Key::Left => cur.index = cur.index.saturating_sub(1),
                 Key::Right => cur.index = (cur.index + 1).min(cur.buf.len() - 1),
