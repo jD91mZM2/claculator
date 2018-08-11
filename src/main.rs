@@ -95,7 +95,7 @@ fn main() -> Result<(), Error> {
                     DynMode::Utf32 => DynMode::Number
                 },
                 Key::Up => mode = match mode {
-                    DynMode::Number => DynMode::Utf8,
+                    DynMode::Number => DynMode::Utf32,
                     DynMode::Binary => DynMode::Number,
                     DynMode::Octal => DynMode::Binary,
                     DynMode::Hex => DynMode::Octal,
