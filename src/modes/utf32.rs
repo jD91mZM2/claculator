@@ -5,7 +5,7 @@ crate struct Utf32;
 
 fn chars<'a>(buf: &'a [u64]) -> impl Iterator<Item = char> + 'a {
     buf.iter()
-        .filter(|&&c| c <= std::u32::MAX as u64)
+        .filter(|&&c| c >= 32 && c <= std::u32::MAX as u64)
         .filter_map(|&c| std::char::from_u32(c as u32))
 }
 
@@ -25,10 +25,7 @@ impl Mode for Utf32 {
         Ok(())
     }
     fn len(self, cur: &Cursor) -> usize {
-        cur.buf.iter()
-            .filter(|&&c| c <= std::u32::MAX as u64)
-            .filter(|&&c| std::char::from_u32(c as u32).is_some())
-            .count()
+        chars(&cur.buf).count()
     }
     fn add(self, cur: &mut Cursor, c: char) -> bool {
         if cur.buf[cur.index] == 0 {
