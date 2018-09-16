@@ -1,21 +1,21 @@
-crate mod prelude {
-    crate use std::io::{self, Write};
-    crate use super::{super::Cursor, Mode};
-    crate use termion::style::{Underline, NoUnderline};
+pub mod prelude {
+    pub use std::io::{self, Write};
+    pub use super::{super::Cursor, Mode};
+    pub use termion::style::{Underline, NoUnderline};
 }
 
-crate mod binary;
-crate mod number;
-crate mod utf8;
-crate mod utf32;
-crate use self::binary::{Binary, Octal, Hex};
-crate use self::number::Number;
-crate use self::utf8::Utf8;
-crate use self::utf32::Utf32;
+pub mod binary;
+pub mod number;
+pub mod utf8;
+pub mod utf32;
+pub use self::binary::{Binary, Octal, Hex};
+pub use self::number::Number;
+pub use self::utf8::Utf8;
+pub use self::utf32::Utf32;
 
 use self::prelude::*;
 
-crate trait Mode: Copy {
+pub trait Mode: Copy {
     fn fmt<W: Write>(self, w: &mut W, cur: &Cursor, selected: bool) -> io::Result<()>;
     fn len(self, cur: &Cursor) -> usize;
     fn add(self, cur: &mut Cursor, c: char) -> bool;
@@ -24,7 +24,7 @@ crate trait Mode: Copy {
 
 #[repr(u8)]
 #[derive(Clone, Copy, Eq, PartialEq)]
-crate enum DynMode {
+pub enum DynMode {
     Number,
     Binary,
     Octal,

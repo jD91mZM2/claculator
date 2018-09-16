@@ -3,7 +3,7 @@ use std::ptr;
 use termion::color;
 
 #[derive(Clone, Copy)]
-crate struct Utf8;
+pub struct Utf8;
 
 fn to_string(cur: &Cursor) -> Option<String> {
     let mut bytes = Vec::with_capacity(cur.buf.len());

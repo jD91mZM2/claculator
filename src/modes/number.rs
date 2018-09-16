@@ -1,7 +1,7 @@
 use super::prelude::*;
 
 #[derive(Clone, Copy)]
-crate struct Number;
+pub struct Number;
 
 impl Mode for Number {
     fn fmt<W: Write>(self, w: &mut W, cur: &Cursor, selected: bool) -> io::Result<()> {

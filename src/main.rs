@@ -1,6 +1,3 @@
-#![feature(rust_2018_preview)]
-#![warn(rust_2018_idioms)]
-
 use failure::Error;
 use std::io::{self, prelude::*};
 use termion::{
@@ -12,11 +9,11 @@ use termion::{
     style
 };
 
-crate struct Cursor {
+pub struct Cursor {
     /// The inner numbers that will be formatted in different ways
-    crate buf: Vec<u64>,
+    pub buf: Vec<u64>,
     /// The cursor position in the buffer
-    crate index: usize
+    pub index: usize
 }
 
 mod modes;

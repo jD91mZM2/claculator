@@ -1,7 +1,7 @@
 use super::prelude::*;
 
 #[derive(Clone, Copy)]
-crate struct Utf32;
+pub struct Utf32;
 
 fn chars<'a>(buf: &'a [u64]) -> impl Iterator<Item = char> + 'a {
     buf.iter()

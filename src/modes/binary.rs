@@ -3,7 +3,7 @@ use super::prelude::*;
 macro_rules! binary_num {
     ($({ name: $name:ident, fmt: $fmt:expr, radix: $radix:expr, bits: $bits:expr }),+) => {
         $(#[derive(Clone, Copy)]
-        crate struct $name;
+        pub struct $name;
 
         impl Mode for $name {
             fn fmt<W: Write>(self, w: &mut W, cur: &Cursor, selected: bool) -> io::Result<()> {
